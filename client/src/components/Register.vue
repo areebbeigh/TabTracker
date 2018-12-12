@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1>Register</h1>
+    <h1>Register</h1>
     <input type="email" name="email" placeholder="email" v-model="email">
     <br>
     <input type="password" name="password" placeholder="password" v-model="password">
@@ -16,19 +16,19 @@ export default {
   name: 'Register',
   data () {
     return {
-        email: '',
-        password: ''
+      email: '',
+      password: ''
     }
   },
   methods: {
-      async register() {
-          let response = await AuthenticationService.register({
-              email: this.email,
-              password: this.password
-          })
+    async register () {
+      let response = await AuthenticationService.register({
+        email: this.email,
+        password: this.password
+      })
 
-          console.log(response)
-      }
+      console.log(response)
+    }
   }
 }
 </script>
