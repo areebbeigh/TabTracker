@@ -7,7 +7,7 @@ module.exports = {
       res.send(user)
     } catch (err) {
       res.status(400).send({
-        error: err.message
+        error: 'That user already exists!'
       })
     }
   }

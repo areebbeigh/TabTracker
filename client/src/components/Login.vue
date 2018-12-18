@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row wrap justify-center>
       <v-flex xs12 sm8 md6 lg4>
-        <h1 class="display-1 text-xs-center mb-4">Register</h1>
+        <h1 class="display-1 text-xs-center mb-4">Login</h1>
         <div class="red lighten-4 red--text text--darken-3 pa-2 mb-4 mt-2" 
           v-html="error"
           v-show="error">
@@ -22,7 +22,7 @@
         ></v-text-field>
 
         <v-btn large flat @click="register">
-          Register
+          Login
         </v-btn>
       </v-flex>      
     </v-layout>
@@ -33,7 +33,7 @@
 import AuthenticationService from '@/services/AuthenticationService'
 
 export default {
-  name: 'Register',
+  name: 'Login',
   data () {
     return {
       email: '',

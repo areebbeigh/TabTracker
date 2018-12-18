@@ -5,7 +5,7 @@ const morgan = require('morgan')
 
 const { sequelize } = require('./models')
 
-const indexRoutes = require('./routes/users')
+const userRoutes = require('./routes/users')
 
 const app = express()
 
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
 // Routes
-app.use('/', indexRoutes)
+app.use('/', userRoutes)
 
 app.set('view engine', 'ejs')
 

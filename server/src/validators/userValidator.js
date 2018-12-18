@@ -11,7 +11,6 @@ module.exports = {
 
     Joi.validate(req.body, userSchema, (err, value) => {
       if (err) {
-        console.log(err)
         if (err.isJoi) {
           switch (err.details[0].context.key) {
             case 'email':
