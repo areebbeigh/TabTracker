@@ -5,7 +5,7 @@ const morgan = require('morgan')
 
 const { sequelize } = require('./models')
 
-const userRoutes = require('./routes/users')
+const { userRoutes, songRoutes } = require('./routes')
 
 const app = express()
 
@@ -17,10 +17,11 @@ app.use(cors())
 
 // Routes
 app.use('/', userRoutes)
+app.use('/songs', songRoutes)
 
 app.set('view engine', 'ejs')
 
-sequelize.sync()
+sequelize.sync({ force: false })
   .then(() => {
     console.log('Done syncing!')
   })

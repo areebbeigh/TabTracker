@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>I'll display all the songs</div>
 </template>
 
 <script>

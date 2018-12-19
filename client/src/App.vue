@@ -8,19 +8,14 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import Songs from './components/Songs'
 import AppHeader from '@/components/Header'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    Songs,
     AppHeader
-  },
-  data () {
-    return {
-      //
-    }
   }
 }
 </script>
