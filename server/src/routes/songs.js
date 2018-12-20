@@ -4,7 +4,8 @@ const router = express.Router()
 const SongsController = require('../controllers/SongsController')
 // const UserValidator = require('../validators/userValidator')
 
-router.get('/', SongsController.show)
+router.get('/', SongsController.index)
 router.post('/', SongsController.create)
+router.get('/:id', SongsController.show)
 
 module.exports = router
