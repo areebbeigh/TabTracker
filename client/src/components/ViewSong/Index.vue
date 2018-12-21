@@ -17,10 +17,10 @@
           cover
         ></v-img>
       </v-flex>
-      
+
       <!-- Metadata -->
       <v-flex xs12 sm7>
-        <div 
+        <div
           class="text-xs-right py-4"
           :class="{'pl-4': $vuetify.breakpoint.smAndUp}">
           <h1 class="headline pb-2 pr-2 text-xs-center text-sm-right">{{song.title}}</h1>
@@ -46,23 +46,23 @@
       <!-- Lyrics -->
       <v-flex xs12 lg6 class="pr-2">
         <h1 class="headline text-xs-center mb-3">Lyrics</h1>
-        <v-textarea 
+        <v-textarea
           solo
           flat
-          readonly 
+          readonly
           auto-grow
-          background-color="grey lighten-3"
+          background-color="grey lighten-4"
           v-model="song.lyrics" />
       </v-flex>
       <!-- Tab -->
       <v-flex xs12 lg6 class="pl-2">
         <h1 class="headline text-xs-center mb-3">Tabs</h1>
-        <v-textarea 
+        <v-textarea
           solo
           flat
-          readonly 
+          readonly
           auto-grow
-          background-color="grey lighten-3"
+          background-color="grey lighten-4"
           v-model="song.tabs" />
       </v-flex>
     </v-layout>
@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { YouTubePlayer } from "vue-youtube-embed";
+import { YouTubePlayer } from 'vue-youtube-embed'
 import SongsService from '@/services/SongsService'
 
 export default {
@@ -99,5 +99,3 @@ export default {
 <style scoped>
 
 </style>
-
-

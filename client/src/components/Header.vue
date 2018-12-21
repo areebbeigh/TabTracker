@@ -9,7 +9,7 @@
     <v-spacer></v-spacer>
 
     <v-toolbar-items>
-      <v-btn flat class="font-weight-regular" 
+      <v-btn flat class="font-weight-regular"
         v-for="item in toolbarItems" :key="item.name"
         router :to="item.link">
         <v-icon left>{{ item.icon }}</v-icon>
@@ -31,4 +31,3 @@ export default {
   }
 }
 </script>
-

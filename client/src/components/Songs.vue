@@ -2,10 +2,10 @@
   <v-container>
     <v-layout justify-center>
       <v-flex xs12 md8>
-        <v-card 
-          flat 
-          class="pa-3 grey lighten-3 mb-4" 
-          v-for="song in songs" 
+        <v-card
+          flat
+          class="pa-3 grey lighten-3 mb-4"
+          v-for="song in songs"
           :key="song.id"
           route :to="'/songs/' + song.id">
           <v-layout row>
@@ -35,25 +35,25 @@
 </template>
 
 <script>
-  import SongsService from '@/services/SongsService'
+import SongsService from '@/services/SongsService'
 
-  export default {  
-    data () {
-      return { 
-        songs: null
-      }
-    },
+export default {
+  data () {
+    return {
+      songs: null
+    }
+  },
 
-    async mounted () {
-      try {
-        let response = await SongsService.index()
-        this.songs = response.data
-        console.log(this.songs)
-      } catch (err) {
-        console.log(err)
-      }
+  async mounted () {
+    try {
+      let response = await SongsService.index()
+      this.songs = response.data
+      console.log(this.songs)
+    } catch (err) {
+      console.log(err)
     }
   }
+}
 </script>
 
 <style>

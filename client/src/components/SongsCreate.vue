@@ -28,7 +28,7 @@
           Create
       </v-btn>
     </v-layout>
-  </v-container>  
+  </v-container>
 </template>
 
 <script>
@@ -59,7 +59,7 @@ export default {
       }
 
       try {
-        const response = await SongsService.create(song)
+        await SongsService.create(song)
         this.$router.push({name: 'songs'})
         // console.log(response.data)
       } catch (err) {
@@ -75,5 +75,3 @@ export default {
   /* border-right: 1px solid rgb(0, 0, 0, 0.1); */
 }
 </style>
-
-
