@@ -6,6 +6,7 @@ const SongsController = require('../controllers/SongsController')
 
 router.get('/', SongsController.index)
 router.post('/', SongsController.create)
+router.put('/', SongsController.update)
 router.get('/:id', SongsController.show)
 
 module.exports = router

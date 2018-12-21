@@ -4,6 +4,7 @@ import Songs from '@/components/Songs'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import SongsCreate from '@/components/SongsCreate'
+import EditSong from '@/components/EditSong'
 
 import ViewSong from '@/components/ViewSong/Index'
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/songs/:id',
       name: 'songs-show',
       component: ViewSong
+    },
+    {
+      path: '/songs/:id/edit',
+      name: 'songs-update',
+      component: EditSong
     }
   ]
 })

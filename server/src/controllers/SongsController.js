@@ -18,6 +18,17 @@ module.exports = {
     }
   },
 
+  async update (req, res) {
+    try {
+      const song = await Song.update(req.body, { where: { id: req.body.id } })
+      res.send(song)
+    } catch (err) {
+      res.status(500).send({
+        err
+      })
+    }
+  },
+
   async show (req, res) {
     try {
       const song = await Song.findById(req.params.id)

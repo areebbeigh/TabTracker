@@ -1,9 +1,9 @@
 <template>
   <v-container>
-    <h1 class="display-1 text-xs-center mb-4">Add Song</h1>
+    <h1 class="display-1 text-xs-center mb-4">Edit Song</h1>
     <song-form :song="song" class="pa-0"></song-form>
     <div class="text-xs-center pa-0">
-      <v-btn large flat @click="create">
+      <v-btn large flat @click="update">
         Save
       </v-btn>
     </div>
@@ -17,7 +17,6 @@ import SongsService from '@/services/SongsService'
 export default {
   data () {
     return {
-      error: null,
       song: {
         title: { type: 'string', required: true, value: null },
         artist: { type: 'string', required: true, value: null },
@@ -36,27 +35,50 @@ export default {
   },
 
   methods: {
-    async create () {
-      // Prepare song object to send to server
-      let song = {}
+    async update () {
+      let song = {
+        id: this.$store.state.route.params.id
+      }
+
       for (let [attr, def] of Object.entries(this.song)) {
         song[attr] = def.value
       }
 
       try {
-        await SongsService.create(song)
-        this.$router.push({name: 'songs'})
-        // console.log(response.data)
+        await SongsService.update(song)
       } catch (err) {
-        this.error = err.response.data.error
+        console.log(err)
       }
+
+      this.$router.push({
+        name: 'songs-show',
+        params: {
+          id: song.id
+        }
+      })
+    }
+  },
+
+  async mounted () {
+    const id = this.$store.state.route.params.id
+    // Fetch song details
+    try {
+      const song = (await SongsService.show(id)).data
+
+      for (const [key, def] of Object.entries(song)) {
+        try {
+          this.song[key].value = def
+        } catch (err) {
+          console.error(err)
+        }
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
 }
 </script>
 
 <style scoped>
-.flex.fields-l {
-  /* border-right: 1px solid rgb(0, 0, 0, 0.1); */
-}
+
 </style>
