@@ -13,11 +13,6 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'songs',
-      component: Songs
-    },
-    {
       path: '/register',
       name: 'register',
       component: Register
@@ -26,6 +21,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/songs',
+      name: 'songs-index',
+      component: Songs
     },
     {
       path: '/songs/new',
@@ -41,6 +41,10 @@ export default new Router({
       path: '/songs/:id/edit',
       name: 'songs-update',
       component: EditSong
+    },
+    {
+      path: '*',
+      redirect: '/songs'
     }
   ]
 })

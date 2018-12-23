@@ -1,12 +1,21 @@
 <template>
-  <v-container>
-    <v-layout justify-center>
-      <v-flex xs12 md8>
+  <div class="mt-4 mx-5">
+    <h1 class="display-1 text-xs-center mb-5">Songs</h1>
+    <v-text-field
+      label="Search"
+      outline
+      class="px-3"
+      v-model.trim="search"
+      ></v-text-field>
+    <v-layout row wrap class="pa-0">
+      <v-flex
+        xs12 md6 lg4
+        class="px-3"
+        v-for="song in songs"
+        :key="song.id">
         <v-card
           flat
           class="pa-3 grey lighten-3 mb-4"
-          v-for="song in songs"
-          :key="song.id"
           route :to="'/songs/' + song.id">
           <v-layout row>
             <v-flex xs7>
@@ -31,16 +40,45 @@
         </v-card>
       </v-flex>
     </v-layout>
-  </v-container>
+  </div>
 </template>
 
 <script>
+import { debounce } from 'lodash'
 import SongsService from '@/services/SongsService'
 
 export default {
   data () {
     return {
-      songs: null
+      songs: null,
+      search: ''
+    }
+  },
+
+  watch: {
+    search (value) {
+      const route = {
+        name: 'songs-index'
+      }
+
+      if (this.search) {
+        route.query = {
+          search: this.search
+        }
+      }
+
+      this.$router.push(route)
+    },
+
+    '$route.query.search': {
+      immediate: true,
+      handler: debounce(async function (value) {
+        try {
+          this.songs = (await SongsService.index(this.search)).data
+        } catch (err) {
+          console.error(err)
+        }
+      }, 700)
     }
   },
 

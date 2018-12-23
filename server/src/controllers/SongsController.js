@@ -1,8 +1,26 @@
+/* eslint-disable */
+
 const { Song } = require('../models')
 
 module.exports = {
   async index (req, res) {
-    const songs = await Song.findAll({ where: {} })
+    let songs = {}
+    if (req.query.search) {
+      const query = req.query.search
+      songs = await Song.findAll({
+        where: {
+          $or: ['title', 'album', 'artist', 'genre', 'lyrics'].map(attr => {
+            return {
+              [attr]: {
+                $like: `%${query}%`
+              }
+            }
+          })
+        }
+      })
+    } else {
+      songs = await Song.findAll({ where: {} })
+    }
     res.send(songs)
   },
 

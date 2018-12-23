@@ -31,6 +31,10 @@ module.exports = {
           user: userJson,
           token
         })
+      } else {
+        res.status(403).send({
+          error: 'Invalid login information.'
+        })
       }
     }
   }
