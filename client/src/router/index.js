@@ -4,9 +4,9 @@ import Songs from '@/components/Songs'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import SongsCreate from '@/components/SongsCreate'
-import EditSong from '@/components/EditSong'
+import SongsEdit from '@/components/SongsEdit'
 
-import ViewSong from '@/components/ViewSong/Index'
+import ViewSong from '@/components/ViewSong/index'
 
 Vue.use(Router)
 
@@ -40,7 +40,7 @@ export default new Router({
     {
       path: '/songs/:id/edit',
       name: 'songs-update',
-      component: EditSong
+      component: SongsEdit
     },
     {
       path: '*',

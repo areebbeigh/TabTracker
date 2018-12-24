@@ -5,7 +5,7 @@ const morgan = require('morgan')
 
 const { sequelize } = require('./models')
 
-const { userRoutes, songRoutes } = require('./routes')
+const { userRoutes, songRoutes, bookmarkRoutes } = require('./routes')
 
 const app = express()
 
@@ -18,6 +18,7 @@ app.use(cors())
 // Routes
 app.use('/', userRoutes)
 app.use('/songs', songRoutes)
+app.use('/bookmarks', bookmarkRoutes)
 
 app.set('view engine', 'ejs')
 

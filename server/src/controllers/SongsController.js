@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 const { Song } = require('../models')
 
 module.exports = {

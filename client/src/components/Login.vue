@@ -21,7 +21,7 @@
           outline
         ></v-text-field>
 
-        <v-btn large flat @click="register">
+        <v-btn large flat @click="login">
           Login
         </v-btn>
       </v-flex>
@@ -42,7 +42,7 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async login () {
       this.error = null
       try {
         let response = await AuthenticationService.login({
@@ -52,6 +52,8 @@ export default {
 
         this.$store.dispatch('setUser', response.data.user)
         this.$store.dispatch('setToken', response.data.token)
+
+        this.$router.push({ name: 'songs-index' })
       } catch (err) {
         this.error = err.response.data.error
       }

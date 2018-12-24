@@ -66,12 +66,14 @@
           v-model="song.tabs" />
       </v-flex>
     </v-layout>
+    <speed-dial :song="song"></speed-dial>
   </v-container>
 </template>
 
 <script>
 import { YouTubePlayer } from 'vue-youtube-embed'
 import SongsService from '@/services/SongsService'
+import SpeedDial from './SpeedDial'
 
 export default {
   data () {
@@ -81,7 +83,8 @@ export default {
   },
 
   components: {
-    youtube: YouTubePlayer
+    youtube: YouTubePlayer,
+    SpeedDial
   },
 
   async mounted () {

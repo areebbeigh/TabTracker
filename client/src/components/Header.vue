@@ -11,7 +11,8 @@
     <v-toolbar-items>
       <v-btn flat class="font-weight-regular"
         v-for="item in toolbarItems" :key="item.name"
-        router :to="item.link">
+        router :to="item.route"
+        @click="handleClick(item)">
         <v-icon left>{{ item.icon }}</v-icon>
         {{ item.name }}
       </v-btn>
@@ -20,13 +21,46 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data () {
     return {
-      toolbarItems: [
-        { name: 'Sign Up', icon: 'account_circle', link: '/register' },
-        { name: 'Login', icon: 'exit_to_app', link: '/login' }
-      ]
+      items: {
+        guests: [
+          { name: 'Sign Up', icon: 'person_add', route: { name: 'register' } },
+          { name: 'Login', icon: 'exit_to_app', route: { name: 'login' } }
+        ],
+        users: [
+          { name: 'Logout', icon: 'power_settings_new', handler: 'logout' }
+        ]
+      }
+    }
+  },
+  computed: {
+    ...mapState(['isUserLoggedIn', 'user']),
+
+    toolbarItems () {
+      let items = []
+      if (this.isUserLoggedIn) {
+        items = this.items.users
+      } else {
+        items = this.items.guests
+      }
+      return items
+    }
+  },
+  methods: {
+    handleClick (item) {
+      if (item.handler) {
+        this[item.handler]()
+      }
+    },
+
+    logout () {
+      this.$store.dispatch('setUser', null)
+      this.$store.dispatch('setToken', null)
+      this.$router.push({ name: 'songs-index' })
     }
   }
 }
