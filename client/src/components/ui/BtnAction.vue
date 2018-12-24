@@ -25,7 +25,8 @@ export default {
         delete: 'delete',
         share: 'share'
       },
-      bookmarked: false
+      bookmarked: null,
+      bookmarkId: null
     }
   },
 
@@ -37,11 +38,17 @@ export default {
     clickHandler () {
       this[this.action]()
     },
-
+    /**
+     * Check if the song is bookmarked by the user and assign bookmark icon
+     */
     async checkBookmark (songId) {
+      if (this.action !== 'bookmark') return
+
       try {
         if (!this.isUserLoggedIn) {
-          return
+          this.bookmarked = false
+          this.bookmarkId = null
+          this.actionIcons.bookmark = 'bookmark_border'
         }
 
         const response = await BookmarksService.show({ userId: this.user.id, songId: this.song.id })
@@ -97,6 +104,12 @@ export default {
 
   async mounted () {
     await this.checkBookmark()
+  },
+
+  watch: {
+    async isUserLoggedIn (value) {
+      await this.checkBookmark()
+    }
   }
 }
 </script>
