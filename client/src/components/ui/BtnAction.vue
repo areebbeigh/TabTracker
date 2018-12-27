@@ -47,20 +47,16 @@ export default {
       try {
         if (!this.isUserLoggedIn) {
           this.bookmarked = false
-          this.bookmarkId = null
-          this.actionIcons.bookmark = 'bookmark_border'
+          return
         }
 
         const response = await BookmarksService.show({ userId: this.user.id, songId: this.song.id })
 
         if (response.data) {
-          this.actionIcons.bookmark = 'bookmark'
           this.bookmarked = true
           this.bookmarkId = response.data.id || null
         } else {
-          this.actionIcons.bookmark = 'bookmark_border'
           this.bookmarked = false
-          this.bookmarkId = null
         }
       } catch (err) {
         console.error(err)
@@ -109,6 +105,14 @@ export default {
   watch: {
     async isUserLoggedIn (value) {
       await this.checkBookmark()
+    },
+
+    bookmarked (isBookmarked) {
+      if (isBookmarked) {
+        this.actionIcons.bookmark = 'bookmark'
+      } else {
+        this.actionIcons.bookmark = 'bookmark_border'
+      }
     }
   }
 }

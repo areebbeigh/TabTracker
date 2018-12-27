@@ -1,5 +1,6 @@
 <template>
-  <v-container>
+  <!-- The if is simply to avoid console errors before the song is fetched -->
+  <v-container v-if="song">
     <!-- YouTube Video -->
     <v-layout row justify-center class="pb-5">
       <v-flex xs12 >
