@@ -7,17 +7,8 @@
       outline
       class="px-3"
       v-model.trim="search"
-      ></v-text-field>
-    <!-- Songs list -->
-    <v-layout row wrap class="pa-0">
-      <v-flex
-        xs12 md6 lg4
-        class="px-3"
-        v-for="song in songs"
-        :key="song.id">
-        <song-card :song="song"></song-card>
-      </v-flex>
-    </v-layout>
+    ></v-text-field>
+    <songs-grid :songs="this.songs"></songs-grid>
   </div>
 </template>
 
@@ -25,26 +16,24 @@
 import { debounce } from 'lodash'
 import SongsService from '@/services/SongsService'
 
-import SongCard from '@/components/ui/SongCard'
-import BtnAction from '@/components/ui/BtnAction'
+import SongsGrid from '@/components/commons/SongsGrid'
 
 export default {
   data () {
     return {
-      songs: null,
-      search: ''
+      search: '',
+      songs: []
     }
   },
 
   components: {
-    SongCard,
-    BtnAction
+    SongsGrid
   },
 
   watch: {
     search (value) {
       const route = {
-        name: 'songs-index'
+        name: this.$route.name
       }
 
       if (this.search) {
@@ -60,6 +49,7 @@ export default {
       immediate: true,
       handler: debounce(async function (value) {
         try {
+          this.search = value
           this.songs = (await SongsService.index(this.search)).data
         } catch (err) {
           console.error(err)

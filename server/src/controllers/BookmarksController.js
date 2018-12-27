@@ -1,4 +1,4 @@
-const { Bookmark } = require('../models')
+const { Bookmark, Song } = require('../models')
 
 module.exports = {
   async index (req, res) {
@@ -8,13 +8,18 @@ module.exports = {
         res.send(bookmarks)
       } else {
         const { userId, songId } = req.query
-        const bookmark = await Bookmark.findOne({
-          where: {
-            UserId: userId,
-            SongId: songId
-          }
+        const where = { UserId: userId }
+
+        if (songId) {
+          where.SongId = songId
+        }
+
+        const bookmarks = await Bookmark.findAll({
+          where,
+          include: [{ model: Song }]
         })
-        res.send(bookmark)
+
+        res.send(bookmarks)
       }
     } catch (err) {
       res.send(err)

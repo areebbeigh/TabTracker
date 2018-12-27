@@ -3,9 +3,10 @@ import Api from '@/services/api'
 const root = 'bookmarks'
 
 export default {
-  index (search) {
+  index (query) {
+    const params = query || {}
     return Api().get(root, {
-      params: { search }
+      params
     })
   },
 

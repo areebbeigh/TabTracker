@@ -1,7 +1,10 @@
 <template>
   <v-toolbar app flat color="grey lighten-3">
     <v-toolbar-side-icon></v-toolbar-side-icon>
-    <v-toolbar-title>
+
+    <v-toolbar-title
+      style="cursor:pointer"
+      @click="$router.push({ name: 'songs-index' })">
       <span class="grey--text text--darken-2 font-weight-light">Tab</span>
       <span class="font-weight-regular">Tracker</span>
     </v-toolbar-title>
@@ -32,6 +35,7 @@ export default {
           { name: 'Login', icon: 'exit_to_app', route: { name: 'login' } }
         ],
         users: [
+          { name: 'My Bookmarks', icon: 'collections_bookmark', route: { name: 'bookmarks' } },
           { name: 'Logout', icon: 'power_settings_new', handler: 'logout' }
         ]
       }
@@ -65,3 +69,6 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+</style>

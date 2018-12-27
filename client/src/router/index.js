@@ -5,6 +5,7 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import SongsCreate from '@/components/SongsCreate'
 import SongsEdit from '@/components/SongsEdit'
+import Bookmarks from '@/components/Bookmarks'
 
 import ViewSong from '@/components/ViewSong/index'
 
@@ -41,6 +42,11 @@ export default new Router({
       path: '/songs/:id/edit',
       name: 'songs-update',
       component: SongsEdit
+    },
+    {
+      path: '/bookmarks',
+      name: 'bookmarks',
+      component: Bookmarks
     },
     {
       path: '*',
