@@ -7,8 +7,9 @@ module.exports = {
         const bookmarks = await Bookmark.findAll()
         res.send(bookmarks)
       } else {
-        const { userId, songId } = req.query
-        const where = { UserId: userId }
+        const userId = req.user.id
+        const { songId } = req.query
+        const where = {}
 
         if (songId) {
           where.SongId = songId
@@ -22,7 +23,10 @@ module.exports = {
         res.send(bookmarks)
       }
     } catch (err) {
-      res.send(err)
+      console.log('error!', err)
+      res.send({
+        error: err.toString()
+      })
     }
   },
 

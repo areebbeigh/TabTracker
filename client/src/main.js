@@ -17,6 +17,10 @@ Vue.use(VueYouTubeEmbed, { global: false })
 
 sync(store, router)
 
+router.beforeEach((from, to, next) => {
+  Promise.all([store.dispatch('checkAuth')]).then(next)
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

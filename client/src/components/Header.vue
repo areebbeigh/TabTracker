@@ -26,6 +26,8 @@
 <script>
 import { mapState } from 'vuex'
 
+import AuthenticationService from '@/services/AuthenticationService'
+
 export default {
   data () {
     return {
@@ -61,11 +63,14 @@ export default {
       }
     },
 
-    logout () {
-      this.$store.dispatch('setUser', null)
-      this.$store.dispatch('setToken', null)
+    async logout () {
+      await AuthenticationService.logout()
       this.$router.push({ name: 'songs-index' })
     }
+  },
+
+  mounted () {
+    this.$store.dispatch('checkAuth')
   }
 }
 </script>

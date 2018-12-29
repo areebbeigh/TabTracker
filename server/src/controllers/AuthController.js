@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken')
+const passport = require('passport')
 
-const { User } = require('../models')
+const { User, InvalidToken } = require('../models')
 const config = require('../config/config')
 
 module.exports = {
@@ -15,27 +15,40 @@ module.exports = {
     }
   },
 
-  async login_post (req, res) {
-    const { email, password } = req.body
-    const user = await User.findOne({ where: { email } })
-
-    if (!user) {
-      res.status(403).send({
-        error: 'Invalid login information.'
-      })
-    } else {
-      if (user.isValidPassword(password)) {
-        const userJson = user.toJSON()
-        const token = jwt.sign(userJson, config.jwtSecret, { expiresIn: '1d' })
-        res.send({
-          user: userJson,
-          token
-        })
-      } else {
-        res.status(403).send({
-          error: 'Invalid login information.'
+  async login_post (req, res, next) {
+    passport.authenticate('local', (err, user) => {
+      if (err) {
+        return res.send({
+          error: err.toString()
         })
       }
+      req.login(user, (err) => {
+        if (err) {
+          return res.status(500).send({
+            error: err.toString()
+          })
+        }
+        res.send({ user })
+      })
+    })(req, res, next)
+  },
+
+  logout (req, res) {
+    req.logout()
+    res.send(null)
+  },
+
+  user (req, res) {
+    if (req.isAuthenticated()) {
+      return res.send({
+        isLoggedIn: true,
+        user: req.user
+      })
     }
+
+    res.send({
+      isLoggedIn: false,
+      user: null
+    })
   }
 }

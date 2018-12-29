@@ -2,6 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
+const session = require('express-session')
+const FileStore = require('session-file-store')(session)
 
 const { sequelize } = require('./models')
 
@@ -13,7 +15,17 @@ const app = express()
 app.use(morgan('short'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
+app.use(cors({ credentials: true, origin: 'http://localhost:8080' }))
+
+// Sessions setup
+app.use(session({
+  store: new FileStore(),
+  secret: 'temp secret',
+  resave: false,
+  saveUninitialized: true
+}))
+// Setup passport
+require('./passport')(app)
 
 // Routes
 app.use('/', userRoutes)

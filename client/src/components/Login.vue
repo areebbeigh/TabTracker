@@ -45,14 +45,12 @@ export default {
     async login () {
       this.error = null
       try {
-        let response = await AuthenticationService.login({
+        await AuthenticationService.login({
           email: this.email,
           password: this.password
         })
 
-        this.$store.dispatch('setUser', response.data.user)
-        this.$store.dispatch('setToken', response.data.token)
-
+        this.$store.dispatch('checkAuth')
         this.$router.push({ name: 'songs-index' })
       } catch (err) {
         this.error = err.response.data.error

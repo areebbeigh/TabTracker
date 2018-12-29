@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
+import AuthenticationService from '../services/AuthenticationService'
 
 Vue.use(Vuex)
 
@@ -13,23 +14,20 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    setToken (state, token) {
-      state.token = token
-      state.isUserLoggedIn = !!token
-    },
-
     setUser (state, user) {
       state.user = user
+      state.isUserLoggedIn = !!user
     }
   },
 
   actions: {
-    setToken ({commit}, token) {
-      commit('setToken', token)
-    },
-
     setUser ({commit}, user) {
       commit('setUser', user)
+    },
+
+    async checkAuth ({commit}) {
+      const response = await AuthenticationService.user()
+      commit('setUser', response.data.user)
     }
   }
 })
