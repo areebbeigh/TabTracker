@@ -2,7 +2,7 @@
   <span>
     <template v-if="ownerActions.includes(action)">
       <v-btn
-        v-if="user.id === song.UserId"
+        v-if="user && user.id === song.UserId"
         icon
         flat
         :fab="fab"
@@ -127,10 +127,12 @@ export default {
     async delete () {
       try {
         await SongsService.delete(this.song.id)
+
         store.dispatch('setMsg', {
-          type: 'info',
+          type: 'success',
           msg: 'Song successfully deleted.'
         })
+        this.$router.push({ name: 'songs-index' })
       } catch (err) {
         store.dispatch('setMsg', {
           type: 'error',

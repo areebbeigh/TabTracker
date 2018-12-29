@@ -22,7 +22,11 @@ app.use(session({
   store: new FileStore(),
   secret: 'temp secret',
   resave: false,
-  saveUninitialized: true
+  rolling: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000 * 3600 * 24
+  }
 }))
 // Setup passport
 require('./passport')(app)

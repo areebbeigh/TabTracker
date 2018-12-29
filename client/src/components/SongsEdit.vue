@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import store from '@/store/store'
 import SongForm from '@/components/SongForm'
 import SongsService from '@/services/SongsService'
 
@@ -37,7 +38,7 @@ export default {
   methods: {
     async update () {
       let song = {
-        id: this.$store.state.route.params.id
+        id: store.state.route.params.id
       }
 
       for (let [attr, def] of Object.entries(this.song)) {
@@ -46,8 +47,15 @@ export default {
 
       try {
         await SongsService.update(song)
+        store.dispatch('setMsg', {
+          type: 'success',
+          msg: 'Changes successfully saved'
+        })
       } catch (err) {
-        console.log(err)
+        store.dispatch('setMsg', {
+          type: 'error',
+          msg: err.response.data.error
+        })
       }
 
       this.$router.push({
@@ -60,16 +68,20 @@ export default {
   },
 
   async mounted () {
-    const id = this.$store.state.route.params.id
+    const id = store.state.route.params.id
     // Fetch song details
     try {
       const song = (await SongsService.show(id)).data
+
+      if (song.UserId !== store.state.user.id) {
+        // this.$router.back()
+      }
 
       for (const [key, def] of Object.entries(song)) {
         try {
           this.song[key].value = def
         } catch (err) {
-          console.error(err)
+          console.log(err)
         }
       }
     } catch (err) {
