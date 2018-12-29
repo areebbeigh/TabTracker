@@ -5,11 +5,16 @@
 </template>
 
 <script>
+import store from '@/store/store'
 import AuthenticationService from '@/services/AuthenticationService'
 
 export default {
   async mounted () {
     await AuthenticationService.logout()
+    store.dispatch('setMsg', {
+      msg: 'Logout successful!'
+    })
+
     this.$router.push({ name: 'songs-index' })
   }
 }

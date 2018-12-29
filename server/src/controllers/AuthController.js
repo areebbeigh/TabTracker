@@ -18,14 +18,14 @@ module.exports = {
   async login_post (req, res, next) {
     passport.authenticate('local', (err, user) => {
       if (err) {
-        return res.send({
-          error: err.toString()
+        return res.status(400).send({
+          error: err.message
         })
       }
       req.login(user, (err) => {
         if (err) {
           return res.status(500).send({
-            error: err.toString()
+            error: 'An internal server error occured'
           })
         }
         res.send({ user })

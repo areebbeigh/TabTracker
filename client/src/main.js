@@ -5,9 +5,11 @@ import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
 import VueYouTubeEmbed from 'vue-youtube-embed'
 
-import './plugins/vuetify'
 import router from './router'
 import store from './store/store'
+
+import './plugins/vuetify'
+import './plugins/toasted'
 
 import App from './App'
 

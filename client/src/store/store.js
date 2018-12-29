@@ -8,21 +8,29 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
-    token: null,
     user: null,
-    isUserLoggedIn: false
+    isUserLoggedIn: false,
+    msg: null
   },
 
   mutations: {
     setUser (state, user) {
       state.user = user
       state.isUserLoggedIn = !!user
+    },
+
+    setMsg (state, msg) {
+      state.msg = msg
     }
   },
 
   actions: {
     setUser ({commit}, user) {
       commit('setUser', user)
+    },
+
+    setMsg ({commit}, msg) {
+      commit('setMsg', msg)
     },
 
     async checkAuth ({commit}) {

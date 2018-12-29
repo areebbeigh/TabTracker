@@ -3,10 +3,6 @@
     <v-layout row wrap justify-center>
       <v-flex xs12 sm8 md6 lg4>
         <h1 class="display-1 text-xs-center mb-4">Register</h1>
-        <div class="red lighten-4 red--text text--darken-3 pa-2 mb-4 mt-2"
-          v-html="error"
-          v-show="error">
-        </div>
         <v-text-field
           label="Email"
           type="email"
@@ -30,6 +26,7 @@
 </template>
 
 <script>
+import store from '@/store/store'
 import AuthenticationService from '@/services/AuthenticationService'
 
 export default {
@@ -37,8 +34,7 @@ export default {
   data () {
     return {
       email: '',
-      password: '',
-      error: null
+      password: ''
     }
   },
   methods: {
@@ -50,9 +46,16 @@ export default {
           password: this.password
         })
 
+        store.dispatch('setMsg', {
+          type: 'success',
+          msg: 'Login successful!'
+        })
         this.$router.push({ name: 'songs-index' })
       } catch (err) {
-        this.error = err.response.data.error
+        store.dispatch('setMsg', {
+          type: 'error',
+          msg: err.response.data.error
+        })
       }
     }
   }

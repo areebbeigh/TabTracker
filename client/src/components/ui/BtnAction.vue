@@ -12,6 +12,8 @@
 
 <script>
 import { mapState } from 'vuex'
+
+import store from '@/store/store'
 import BookmarksService from '@/services/BookmarksService'
 
 export default {
@@ -72,12 +74,23 @@ export default {
               userId: this.user.id,
               songId: this.song.id
             })
+
+            store.dispatch('setMsg', {
+              msg: 'Bookmark added.'
+            })
           } else {
             await BookmarksService.delete(this.bookmarkId)
+            store.dispatch('setMsg', {
+              msg: 'Bookmark removed.'
+            })
           }
 
           await this.checkBookmark()
         } else {
+          store.dispatch('setMsg', {
+            type: 'info',
+            msg: 'You need to be logged in!'
+          })
           this.$router.push({ name: 'login' })
         }
       } catch (err) {

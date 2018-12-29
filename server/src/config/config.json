@@ -23,5 +23,5 @@
       "dialect": "mysql"
     }
   },
-  "jwtSecret": "This is the supersecret jwt key!"
+  "cookieSecret": "super secret cookie secret!"
 }
