@@ -6,7 +6,6 @@ const session = require('express-session')
 const FileStore = require('session-file-store')(session)
 
 const { sequelize } = require('./models')
-
 const { userRoutes, songRoutes, bookmarkRoutes } = require('./routes')
 
 const app = express()
@@ -20,7 +19,7 @@ app.use(cors({ credentials: true, origin: 'http://localhost:8080' }))
 // Sessions setup
 app.use(session({
   store: new FileStore(),
-  secret: 'temp secret',
+  secret: process.env.cookieSecret,
   resave: false,
   rolling: true,
   saveUninitialized: true,
