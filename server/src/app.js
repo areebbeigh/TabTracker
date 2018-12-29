@@ -30,11 +30,12 @@ app.use(session({
 }))
 // Setup passport
 require('./passport')(app)
-
+const path = require('path')
 // Routes
-app.use('/', userRoutes)
-app.use('/songs', songRoutes)
-app.use('/bookmarks', bookmarkRoutes)
+app.use('/', express.static(path.resolve(__dirname, 'public')))
+app.use('/api/', userRoutes)
+app.use('/api/songs', songRoutes)
+app.use('/api/bookmarks', bookmarkRoutes)
 
 app.set('view engine', 'ejs')
 
