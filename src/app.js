@@ -32,9 +32,11 @@ app.use(session({
 require('./passport')(app)
 
 // Routes
-app.use('/', userRoutes)
-app.use('/songs', songRoutes)
-app.use('/bookmarks', bookmarkRoutes)
+const path = require('path')
+app.use('/', express.static(path.resolve(__dirname, 'public')))
+app.use('/api', userRoutes)
+app.use('/api/songs', songRoutes)
+app.use('/api/bookmarks', bookmarkRoutes)
 
 app.set('view engine', 'ejs')
 
