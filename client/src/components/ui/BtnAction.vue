@@ -50,7 +50,7 @@ export default {
           return
         }
 
-        const response = await BookmarksService.index({ userId: this.user.id, songId: this.song.id })
+        const response = await BookmarksService.index({ songId: this.song.id })
         const bookmark = response.data.length ? response.data[0] : null
 
         if (bookmark) {

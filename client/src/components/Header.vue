@@ -26,8 +26,6 @@
 <script>
 import { mapState } from 'vuex'
 
-import AuthenticationService from '@/services/AuthenticationService'
-
 export default {
   data () {
     return {
@@ -38,7 +36,7 @@ export default {
         ],
         users: [
           { name: 'My Bookmarks', icon: 'collections_bookmark', route: { name: 'bookmarks' } },
-          { name: 'Logout', icon: 'power_settings_new', handler: 'logout' }
+          { name: 'Logout', icon: 'power_settings_new', route: { name: 'logout' } }
         ]
       }
     }
@@ -61,11 +59,6 @@ export default {
       if (item.handler) {
         this[item.handler]()
       }
-    },
-
-    async logout () {
-      await AuthenticationService.logout()
-      this.$router.push({ name: 'songs-index' })
     }
   },
 

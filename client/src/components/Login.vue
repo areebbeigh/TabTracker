@@ -50,7 +50,6 @@ export default {
           password: this.password
         })
 
-        this.$store.dispatch('checkAuth')
         this.$router.push({ name: 'songs-index' })
       } catch (err) {
         this.error = err.response.data.error

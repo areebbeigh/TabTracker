@@ -76,7 +76,7 @@ export default {
 
   async mounted () {
     try {
-      this.bookmarks = (await BookmarksService.index({ userId: this.$store.state.user.id })).data
+      this.bookmarks = (await BookmarksService.index()).data
       // Sort by most recent first
       this.bookmarks.sort((a, b) => {
         const createdA = new Date(a.createdAt)

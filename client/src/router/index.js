@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Songs from '@/components/Songs'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
+import Logout from '@/components/Logout'
 import SongsCreate from '@/components/SongsCreate'
 import SongsEdit from '@/components/SongsEdit'
 import Bookmarks from '@/components/Bookmarks'
@@ -47,6 +48,11 @@ export default new Router({
       path: '/bookmarks',
       name: 'bookmarks',
       component: Bookmarks
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      component: Logout
     },
     {
       path: '*',
