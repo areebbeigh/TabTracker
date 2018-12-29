@@ -7,9 +7,8 @@ module.exports = {
         const bookmarks = await Bookmark.findAll()
         res.send(bookmarks)
       } else {
-        const userId = req.user.id
         const { songId } = req.query
-        const where = {}
+        const where = { UserId: req.user.id }
 
         if (songId) {
           where.SongId = songId
@@ -34,7 +33,7 @@ module.exports = {
     try {
       const [ bookmark, created ] = await Bookmark.findOrCreate({
         where: {
-          UserId: req.body.userId,
+          UserId: req.user.id,
           SongId: req.body.songId
         }
       })
@@ -55,7 +54,6 @@ module.exports = {
 
   async delete (req, res) {
     try {
-      console.log(req.params.id)
       const destroyed = await Bookmark.destroy({
         where: {
           id: req.params.id
