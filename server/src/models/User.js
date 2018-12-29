@@ -8,7 +8,7 @@ function hashPassword (user, options) {
 }
 
 module.exports = (sequelize, DataTypes) => {
-  let User = sequelize.define('User', {
+  const User = sequelize.define('User', {
     email: {
       type: DataTypes.STRING,
       unique: true
@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       beforeSave: hashPassword
     }
   })
+
+  User.associate = function (models) {
+    User.hasMany(models.Song)
+  }
 
   User.prototype.isValidPassword = function (password) {
     return bcrypt.compareSync(password, this.password)

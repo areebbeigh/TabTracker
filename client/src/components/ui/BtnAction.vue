@@ -1,13 +1,28 @@
 <template>
-  <v-btn
-    icon
-    flat
-    :fab="fab"
-    :small="fab"
-    :class="{ 'grey darken-3 theme--dark': fab }"
-    @click.prevent="clickHandler">
-    <v-icon>{{actionIcons[action]}}</v-icon>
-  </v-btn>
+  <span>
+    <template v-if="ownerActions.includes(action)">
+      <v-btn
+        v-if="user.id === song.UserId"
+        icon
+        flat
+        :fab="fab"
+        :small="fab"
+        :class="{ 'grey darken-3 theme--dark': fab }"
+        @click.prevent="clickHandler">
+        <v-icon>{{actionIcons[action]}}</v-icon>
+      </v-btn>
+    </template>
+    <v-btn
+      v-else
+      icon
+      flat
+      :fab="fab"
+      :small="fab"
+      :class="{ 'grey darken-3 theme--dark': fab }"
+      @click.prevent="clickHandler">
+      <v-icon>{{actionIcons[action]}}</v-icon>
+    </v-btn>
+  </span>
 </template>
 
 <script>
@@ -15,12 +30,14 @@ import { mapState } from 'vuex'
 
 import store from '@/store/store'
 import BookmarksService from '@/services/BookmarksService'
+import SongsService from '@/services/SongsService'
 
 export default {
   props: ['song', 'fab', 'action'],
 
   data () {
     return {
+      ownerActions: ['edit', 'delete'],
       actionIcons: {
         edit: 'edit',
         bookmark: 'bookmark_border',
@@ -107,8 +124,19 @@ export default {
       })
     },
 
-    delete () {
-
+    async delete () {
+      try {
+        await SongsService.delete(this.song.id)
+        store.dispatch('setMsg', {
+          type: 'info',
+          msg: 'Song successfully deleted.'
+        })
+      } catch (err) {
+        store.dispatch('setMsg', {
+          type: 'error',
+          msg: 'An error occured during the process.'
+        })
+      }
     }
   },
 

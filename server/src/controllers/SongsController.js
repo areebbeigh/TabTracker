@@ -24,12 +24,14 @@ module.exports = {
 
   async create (req, res) {
     try {
-      const song = await Song.create(req.body)
+      const song = await Song.create({
+        UserId: req.user.id,
+        ...req.body
+      })
       res.send(song)
     } catch (err) {
       res.status(400).send({
-        // TODO: Send actual errror
-        err
+        err: err.message
       })
     }
   },
@@ -59,6 +61,18 @@ module.exports = {
     } catch (err) {
       res.status(500).send({
         err
+      })
+    }
+  },
+
+  async delete (req, res) {
+    try {
+      console.log('here')
+      await Song.destroy({ where: { id: req.params.id } })
+      res.send(null)
+    } catch (err) {
+      res.status(500).send({
+        error: err.message
       })
     }
   }

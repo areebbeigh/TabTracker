@@ -17,5 +17,9 @@ export default {
 
   show (id) {
     return Api().get(`songs/${id}`)
+  },
+
+  delete (id) {
+    return Api().delete(`songs/${id}`)
   }
 }
