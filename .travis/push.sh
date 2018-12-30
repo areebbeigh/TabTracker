@@ -10,9 +10,11 @@ commit_website_files() {
   git add -f public/*
   git checkout deployed
   git commit --message "[ci skip] Travis build: $TRAVIS_BUILD_NUMBER"
+  git push origin deployed
   git checkout master package.json
   git status
   git commit -m "[ci skip] Merging package.json from master. Travis build: $TRAVIS_BUILD_NUMBER"
+  git push origin deployed
 }
 
 set_origin() {
@@ -20,11 +22,6 @@ set_origin() {
   git remote add origin https://${GH_TOKEN}@github.com/areebbeigh/TabTracker.git
 }
 
-upload_files() {
-  git push origin deployed
-}
-
 setup_git
 set_origin
 commit_website_files
-upload_files
