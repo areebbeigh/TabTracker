@@ -4,13 +4,13 @@ setup_git() {
 }
 
 commit_website_files() {
-  git checkout -b test
+  git checkout -b deployed
   git add --all
   git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
 }
 
 upload_files() {
-  git remote add origin-pages https://${GH_TOKEN}@github.com/areebbeigh/TabTracker.git > /dev/null 2>&1
+  git remote add origin https://${GH_TOKEN}@github.com/areebbeigh/TabTracker.git
   git push --set-upstream origin test
 }
 
