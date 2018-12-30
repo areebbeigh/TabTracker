@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production npm run build && npm run seed && node app.js",
     "dev": "./node_modules/nodemon/bin/nodemon.js app.js --ignore sessions/ --ignore client/ --exec 'npm run lint && node'",
-    "build": "cd client && npm run build && cd ..",
+    "build": "cd client && npm install && npm run build && cd ..",
     "seed": "node ./seeds",
     "lint": "./node_modules/.bin/eslint \"**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
