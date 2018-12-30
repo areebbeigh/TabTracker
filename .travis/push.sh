@@ -4,18 +4,23 @@ setup_git() {
 }
 
 commit_website_files() {
+  git fetch
   git branch -a
   git checkout deployed
   git add --all
   git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
 }
 
-upload_files() {
+set_origin() {
   git remote remove origin
   git remote add origin https://${GH_TOKEN}@github.com/areebbeigh/TabTracker.git
+}
+
+upload_files() {
   git push origin deployed
 }
 
 setup_git
+set_origin
 commit_website_files
 upload_files
