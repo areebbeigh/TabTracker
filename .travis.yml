@@ -2,6 +2,6 @@
 lang: node_js
 script:
   # - npm install && npm run build
-  - $TRAVIS_BUILD_NUMBER > test.txt
+  - echo $TRAVIS_BUILD_NUMBER > test.txt
 after_success:
   - .travis/push.sh
