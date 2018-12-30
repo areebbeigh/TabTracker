@@ -7,8 +7,9 @@ commit_website_files() {
   git fetch
   git branch -a
   git checkout deployed
+  git rm --cached public/*
   git add -f public/*
-  git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
+  git commit --message "[ci skip] Travis build: $TRAVIS_BUILD_NUMBER"
 }
 
 set_origin() {
