@@ -1,8 +1,7 @@
 # Ruby is our language as asciidoctor is a ruby gem.
 lang: node_js
 script:
-  # - npm install && npm run build
-  - echo $TRAVIS_BUILD_NUMBER > test.txt
-  - npm i chalk
+  - npm install && npm run build
+  # - echo $TRAVIS_BUILD_NUMBER > test.txt
 after_success:
   - .travis/push.sh
