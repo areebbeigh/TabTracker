@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production npm run build && npm run seed && node app.js",
+    "start": "NODE_ENV=production npm run seed && node app.js",
     "dev": "./node_modules/nodemon/bin/nodemon.js app.js --ignore sessions/ --ignore client/ --exec 'npm run lint && node'",
     "dev:client": "webpack-dev-server --inline --progress --config client/build/webpack.dev.conf.js --host 0.0.0.0",
     "build": "node client/build/build.js",
