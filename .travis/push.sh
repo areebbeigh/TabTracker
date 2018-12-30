@@ -7,11 +7,11 @@ commit_website_files() {
   git fetch
   git branch -a
   git checkout deployed
+  git add --all
+  git add -f public/*
   git checkout master package.json
   git status
   git commit -m "[ci skip] Merging package.json from master"
-  git add --all
-  git add -f public/*
   git commit --message "[ci skip] Travis build: $TRAVIS_BUILD_NUMBER"
 }
 
