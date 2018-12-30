@@ -3,5 +3,6 @@ lang: node_js
 script:
   # - npm install && npm run build
   - echo $TRAVIS_BUILD_NUMBER > test.txt
+  - npm i chalk
 after_success:
   - .travis/push.sh
