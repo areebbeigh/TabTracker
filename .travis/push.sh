@@ -12,7 +12,7 @@ commit_website_files() {
 upload_files() {
   git remote remove origin
   git remote add origin https://${GH_TOKEN}@github.com/areebbeigh/TabTracker.git
-  git push --set-upstream origin test
+  git push --set-upstream origin deployed
 }
 
 setup_git
