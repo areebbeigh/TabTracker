@@ -5,9 +5,9 @@ const morgan = require('morgan')
 const session = require('express-session')
 const FileStore = require('session-file-store')(session)
 
-const { sequelize } = require('./models')
-
-const { userRoutes, songRoutes, bookmarkRoutes } = require('./routes')
+const config = require('./src/config/config')
+const { sequelize } = require('./src/models')
+const { userRoutes, songRoutes, bookmarkRoutes } = require('./src/routes')
 
 const app = express()
 
@@ -20,7 +20,7 @@ app.use(cors({ credentials: true, origin: 'http://localhost:8080' }))
 // Sessions setup
 app.use(session({
   store: new FileStore(),
-  secret: 'temp secret',
+  secret: process.env.cookieSecret || config.cookieSecret,
   resave: false,
   rolling: true,
   saveUninitialized: true,
@@ -28,9 +28,11 @@ app.use(session({
     maxAge: 1000 * 3600 * 24
   }
 }))
+
 // Setup passport
-require('./passport')(app)
+require('./src/passport')(app)
 const path = require('path')
+
 // Routes
 app.use('/', express.static(path.resolve(__dirname, 'public')))
 app.use('/api/', userRoutes)

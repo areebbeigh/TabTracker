@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/nodemon/bin/nodemon.js src/app.js --ignore sessions/ --exec 'npm run lint && node'",
+    "start:dev": "./node_modules/nodemon/bin/nodemon.js app.js --ignore sessions/ --ignore client/ --exec 'npm run lint && node'",
+    "start:prod": "npm run build && npm run seed && node app.js",
+    "build": "cd client && npm run build && cd ..",
+    "seed": "node ./seeds",
     "lint": "./node_modules/.bin/eslint \"**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node ./seeds"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",

@@ -10,6 +10,11 @@ const songs = require('./songs')
 const bookmarks = require('./bookmarks')
 
 async function seed () {
+  if (process.env.NODE_ENV === 'production') {
+    users[0].password = process.env.seedPassword1
+    users[1].password = process.env.seedPassword2
+  }
+
   await sequelize.sync({ force: true })
 
   await Promise.all(users.map(user => {
