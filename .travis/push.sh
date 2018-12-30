@@ -7,6 +7,7 @@ commit_website_files() {
   git fetch
   git branch -a
   git checkout deployed
+  git checkout master package.json
   git add -f public/*
   git add --all
   git commit --message "[ci skip] Travis build: $TRAVIS_BUILD_NUMBER"
