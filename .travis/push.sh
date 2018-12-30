@@ -7,7 +7,7 @@ commit_website_files() {
   git fetch
   git branch -a
   git checkout deployed
-  git add public/*
+  git add -f public/*
   git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
 }
 
