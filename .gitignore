@@ -7,9 +7,10 @@ yarn-error.log*
 /test/e2e/reports/
 selenium-debug.log
 
+package-lock.json
 public/
 dist/
-tabtracker.sqlite
+tabtracker.sqlite*
 sessions/
 
 # Editor directories and files
