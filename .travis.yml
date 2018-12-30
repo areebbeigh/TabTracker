@@ -1,6 +1,6 @@
 # Ruby is our language as asciidoctor is a ruby gem.
 lang: node_js
 script:
-  - npm install && npm build
+  - npm install && npm run build
 after_success:
   - .travis/push.sh
