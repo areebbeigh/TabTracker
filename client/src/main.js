@@ -4,6 +4,7 @@ import Vue from 'vue'
 
 import { sync } from 'vuex-router-sync'
 import VueYouTubeEmbed from 'vue-youtube-embed'
+import VueClipboard from 'vue-clipboard2'
 
 import router from './router'
 import store from './store/store'
@@ -17,6 +18,7 @@ import App from './App'
 Vue.config.productionTip = false
 
 Vue.use(VueYouTubeEmbed, { global: false })
+Vue.use(VueClipboard)
 
 sync(store, router)
 

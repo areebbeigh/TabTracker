@@ -100,8 +100,7 @@ export default {
 
           await this.checkBookmark()
         } else {
-          this.displayToast('You need to be logged in!', { type: 'info' })
-          this.$router.push({ name: 'login' })
+          this.$router.push({ name: 'login', query: { err: true } })
         }
       } catch (err) {
         console.error(err)
@@ -126,6 +125,17 @@ export default {
         this.$root.$emit('fetchSongs')
       } catch (err) {
         this.displayToast('An error occured during the process.', { type: 'error' })
+      }
+    },
+
+    async share () {
+      const baseUrl = window.location.origin
+      const path = this.$router.resolve({ name: 'songs-show', params: { id: this.song.id } }).href
+      try {
+        await this.$copyText(`${baseUrl}/${path}`)
+        this.displayToast('Share URL copied to clipboard.')
+      } catch (err) {
+        this.displayToast('Something went wrong!', { type: 'error' })
       }
     }
   },

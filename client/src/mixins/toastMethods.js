@@ -24,9 +24,10 @@ Vue.mixin({
         }
       })
 
-      options = {
-        ...options,
-        action
+      options.action = action
+
+      if (options.type === 'error') {
+        options.className = ['red', 'darken-1']
       }
 
       this.$toasted.show(msg, options)

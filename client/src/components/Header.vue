@@ -1,7 +1,5 @@
 <template>
   <v-toolbar app flat color="grey lighten-3">
-    <v-toolbar-side-icon></v-toolbar-side-icon>
-
     <v-toolbar-title
       style="cursor:pointer"
       @click="$router.push({ name: 'songs-index' })">

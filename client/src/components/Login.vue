@@ -31,12 +31,14 @@ import AuthenticationService from '@/services/AuthenticationService'
 
 export default {
   name: 'Login',
+
   data () {
     return {
       email: '',
       password: ''
     }
   },
+
   methods: {
     async login () {
       this.error = null
@@ -47,21 +49,24 @@ export default {
         })
 
         this.displayToast('Login successful!', { type: 'success' })
-
-        this.$router.push({ name: 'songs-index' })
+        await store.dispatch('checkAuth')
+        const redirect = this.$route.query.redirect || { name: 'songs-index' }
+        this.$router.push(redirect)
       } catch (err) {
         this.displayToast(err.response.data.error, { type: 'error' })
       }
+    }
+  },
+
+  mounted () {
+    if (this.$route.query.err) {
+      this.displayToast('You need to be logged in!')
     }
   }
 }
 </script>
 
 <style scoped>
-.error {
-  color: red;
-}
-
 .v-btn {
   width: 100%;
   margin: 0;

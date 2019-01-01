@@ -17,9 +17,9 @@ module.exports = {
 
   async login_post (req, res, next) {
     passport.authenticate('local', (err, user) => {
-      if (err) {
+      if (err || !user) {
         return res.status(400).send({
-          error: err.message
+          error: 'Invalid username/password'
         })
       }
       req.login(user, (err) => {

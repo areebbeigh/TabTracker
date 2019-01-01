@@ -10,7 +10,6 @@ module.exports = function (app) {
     async function (email, password, done) {
       try {
         const user = await User.findOne({ where: { email } })
-
         if (!user) {
           return done(new Error('User does not exist'), false)
         }

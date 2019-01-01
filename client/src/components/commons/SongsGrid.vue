@@ -3,7 +3,7 @@
     <v-layout row wrap class="pa-0">
       <v-flex
         xs12 md6 lg4
-        class="px-3"
+        class="px-3 py-3"
         v-for="song in songs"
         :key="song.id">
         <song-card :song="song"></song-card>

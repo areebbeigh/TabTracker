@@ -12,6 +12,17 @@
     ></v-text-field>
     <!-- Songs list -->
     <songs-grid :songs="this.songs"></songs-grid>
+    <v-btn
+      color="grey darken-3"
+      dark
+      fixed
+      bottom
+      right
+      fab
+      router :to="{ name: 'songs-create' }"
+    >
+      <v-icon>add</v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -71,6 +82,13 @@ export default {
           response = await SongsService.index()
         }
         this.songs = response.data
+
+        // Sort by most recent first
+        this.songs.sort((a, b) => {
+          const createdA = new Date(a.createdAt)
+          const createdB = new Date(b.createdAt)
+          return createdB - createdA
+        })
       } catch (err) {
         console.log(err)
       }

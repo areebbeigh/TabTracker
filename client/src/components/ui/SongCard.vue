@@ -1,9 +1,11 @@
 <template>
   <v-card
     flat
-    class="grey lighten-3 mb-4"
+    class="grey lighten-3"
+    height="100%"
     route :to="'/songs/' + song.id">
     <v-layout row>
+      <!-- Metadata -->
       <v-flex xs7>
         <v-card-title>
           <div style="width:90%">
@@ -14,7 +16,7 @@
           </div>
         </v-card-title>
       </v-flex>
-
+      <!-- Album cover -->
       <v-flex
         xs5
         class="pa-2">

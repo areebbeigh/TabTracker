@@ -45,7 +45,7 @@ export default {
 
       try {
         await SongsService.create(song)
-        this.$router.push({name: 'songs'})
+        this.$router.push({ name: 'songs-index' })
         // console.log(response.data)
       } catch (err) {
         this.error = err.response.data.error

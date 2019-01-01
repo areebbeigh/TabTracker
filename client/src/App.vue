@@ -4,6 +4,11 @@
     <v-content>
       <router-view></router-view>
     </v-content>
+    <footer class="text-xs-center py-4 grey--text text--darken-2">
+      <a href="https://github.com/areebbeigh/TabTracker">TabTracker</a>
+      by
+      <a href="https://github.com/areebbeigh/">@areebbeigh</a>
+    </footer>
   </v-app>
 </template>
 
@@ -22,8 +27,7 @@ export default {
   },
 
   mounted () {
-    this.displayToast('Welcome to TabTracker demo!', { 
-      duration: null,
+    this.displayToast('Welcome to TabTracker demo!', {
       action: {
         text: 'GitHub',
         href: 'https://github.com/areebbeigh/TabTracker',
@@ -37,5 +41,9 @@ export default {
 <style>
 .toasted {
   font-family: 'Roboto', sans-serif;
+}
+footer a {
+  text-decoration: none;
+  color: #1b1818
 }
 </style>

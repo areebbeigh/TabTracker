@@ -9,10 +9,11 @@ import SongsEdit from '@/components/SongsEdit'
 import Bookmarks from '@/components/Bookmarks'
 
 import ViewSong from '@/components/ViewSong/index'
+import store from '@/store/store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/register',
@@ -32,7 +33,8 @@ export default new Router({
     {
       path: '/songs/new',
       name: 'songs-create',
-      component: SongsCreate
+      component: SongsCreate,
+      meta: { requiresAuth: true }
     },
     {
       path: '/songs/:id',
@@ -42,12 +44,14 @@ export default new Router({
     {
       path: '/songs/:id/edit',
       name: 'songs-update',
-      component: SongsEdit
+      component: SongsEdit,
+      meta: { requiresAuth: true }
     },
     {
       path: '/bookmarks',
       name: 'bookmarks',
-      component: Bookmarks
+      component: Bookmarks,
+      meta: { requiresAuth: true }
     },
     {
       path: '/logout',
@@ -60,3 +64,20 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.state.isUserLoggedIn) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath, err: true }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
+export default router
