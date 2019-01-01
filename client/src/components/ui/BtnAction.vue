@@ -92,19 +92,19 @@ export default {
               songId: this.song.id
             })
 
-            store.dispatch('setMsg', {
+            this.displayToast({
               msg: 'Bookmark added.'
             })
           } else {
             await BookmarksService.delete(this.bookmarkId)
-            store.dispatch('setMsg', {
+            this.displayToast({
               msg: 'Bookmark removed.'
             })
           }
 
           await this.checkBookmark()
         } else {
-          store.dispatch('setMsg', {
+          this.displayToast({
             type: 'info',
             msg: 'You need to be logged in!'
           })
@@ -128,13 +128,14 @@ export default {
       try {
         await SongsService.delete(this.song.id)
 
-        store.dispatch('setMsg', {
+        this.displayToast({
           type: 'success',
           msg: 'Song successfully deleted.'
         })
-        this.$router.push({ name: 'songs-index' })
+
+        this.$root.$emit('fetchSongs')
       } catch (err) {
-        store.dispatch('setMsg', {
+        this.displayToast({
           type: 'error',
           msg: 'An error occured during the process.'
         })

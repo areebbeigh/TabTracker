@@ -10,6 +10,7 @@ import store from './store/store'
 
 import './plugins/vuetify'
 import './plugins/toasted'
+import './mixins/toastMethods'
 
 import App from './App'
 

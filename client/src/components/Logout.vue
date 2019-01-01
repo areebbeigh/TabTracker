@@ -11,7 +11,7 @@ import AuthenticationService from '@/services/AuthenticationService'
 export default {
   async mounted () {
     await AuthenticationService.logout()
-    store.dispatch('setMsg', {
+    this.displayToast({
       msg: 'Logout successful!'
     })
 

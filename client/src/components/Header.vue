@@ -20,7 +20,7 @@
         router :to="item.route"
         @click="handleClick(item)">
         <v-icon
-          :class="{ 'ma-0': displayIconsOnly, 'ma-2': !displayIconsOnly }" 
+          :class="{ 'ma-0': displayIconsOnly, 'ma-2': !displayIconsOnly }"
           left>
           {{ item.icon }}</v-icon>
         <span v-show="!displayIconsOnly">{{ item.name }}</span>

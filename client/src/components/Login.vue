@@ -46,13 +46,14 @@ export default {
           password: this.password
         })
 
-        store.dispatch('setMsg', {
+        this.displayToast({
           type: 'success',
           msg: 'Login successful!'
         })
+
         this.$router.push({ name: 'songs-index' })
       } catch (err) {
-        store.dispatch('setMsg', {
+        this.displayToast({
           type: 'error',
           msg: err.response.data.error
         })

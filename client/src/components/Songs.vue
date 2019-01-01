@@ -10,6 +10,7 @@
       class="px-3"
       v-model.trim="search"
     ></v-text-field>
+    <!-- Songs list -->
     <songs-grid :songs="this.songs"></songs-grid>
   </div>
 </template>
@@ -52,7 +53,7 @@ export default {
       handler: debounce(async function (value) {
         try {
           this.search = value
-          this.songs = (await SongsService.index(this.search)).data
+          this.fetchSongs(value)
         } catch (err) {
           console.error(err)
         }
@@ -60,13 +61,26 @@ export default {
     }
   },
 
-  async mounted () {
-    try {
-      let response = await SongsService.index()
-      this.songs = response.data
-    } catch (err) {
-      console.log(err)
+  methods: {
+    async fetchSongs (search) {
+      try {
+        let response
+        if (search) {
+          response = await SongsService.index(search)
+        } else {
+          response = await SongsService.index()
+        }
+        this.songs = response.data
+      } catch (err) {
+        console.log(err)
+      }
     }
+  },
+
+  mounted () {
+    this.$root.$on('fetchSongs', x => {
+      this.fetchSongs(null)
+    })
   }
 }
 </script>
