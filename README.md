@@ -1,5 +1,14 @@
 # TabTracker
-A user provided collection of song metadata, lyrics and guitar tabs.
+A user provided collection of song metadata, lyrics and guitar tabs. This is a practice web app inspired by [codyseibert/tab-tracker](https://github.com/codyseibert/tab-tracker) built in a freeCodeCamp tutorial series.
+
+## What I'm using
+TabTracker uses VueJS, Vuetify, NodeJS and Sequelize.
+
+## What's different
+This version of TabTracker is a little different than the one built in the tutorial.
+- Better UI
+- Slightly different file structure
+- [Uses cookie based session management instead of JWTs](http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions/)
 
 ## Deployment Strategy
 Builds are pushed to `remote/deployed` on every commit to `master` (or every 24 hours) from Travis CI. I had to do this because heroku was running out of memory if I tried to build the vue front-end on heroku. Commits to `remote/deployed` trigger heroku builds where the database is re-seeded with demo data.
