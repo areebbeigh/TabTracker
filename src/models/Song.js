@@ -10,5 +10,9 @@ module.exports = function (sequelize, DataTypes) {
     tabs: DataTypes.TEXT
   })
 
+  Song.associate = function (models) {
+    Song.hasMany(models.Bookmark)
+  }
+
   return Song
 }
