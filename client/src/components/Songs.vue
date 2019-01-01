@@ -1,5 +1,7 @@
 <template>
-  <div class="mt-4 mx-5">
+  <div
+    class="mt-4"
+    :class="{ 'mx-5': $vuetify.breakpoint.mdAndUp }">
     <h1 class="display-1 text-xs-center mb-5">Songs</h1>
     <!-- Search box -->
     <v-text-field

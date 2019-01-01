@@ -1,10 +1,11 @@
 <template>
-  <v-container>
+  <div>
     <v-layout row wrap justify-center>
       <!-- Text fields -->
       <v-flex
-        xs6
-        class="px-4 fields-l"
+        xs12 md6
+        class="fields-l"
+        :class="{ 'px-2': $vuetify.breakpoint.smAndUp }"
         v-for="[name, def] in textFields"
         :key="name.toString()">
           <v-text-field
@@ -18,7 +19,7 @@
       <!-- Text areas -->
       <v-flex
         xs12 md6
-        class="px-4"
+        :class="{ 'px-2': $vuetify.breakpoint.smAndUp }"
         v-for="[name, def] in textAreas"
         :key="name">
           <v-textarea
@@ -30,7 +31,7 @@
             ></v-textarea>
       </v-flex>
     </v-layout>
-  </v-container>
+  </div>
 </template>
 
 <script>
