@@ -19,12 +19,23 @@ export default {
   components: {
     Songs,
     AppHeader
+  },
+
+  mounted () {
+    this.displayToast('Welcome to TabTracker demo!', { 
+      duration: null,
+      action: {
+        text: 'GitHub',
+        href: 'https://github.com/areebbeigh/TabTracker',
+        target: '_blank'
+      }
+    })
   }
 }
 </script>
 
-<style scoped>
-.toast {
-  color: red;
+<style>
+.toasted {
+  font-family: 'Roboto', sans-serif;
 }
 </style>
