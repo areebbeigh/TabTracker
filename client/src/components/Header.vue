@@ -12,12 +12,18 @@
     <v-spacer></v-spacer>
 
     <v-toolbar-items>
-      <v-btn flat class="font-weight-regular"
+      <v-btn
+        flat
+        :icon="displayIconsOnly"
+        class="font-weight-regular"
         v-for="item in toolbarItems" :key="item.name"
         router :to="item.route"
         @click="handleClick(item)">
-        <v-icon left>{{ item.icon }}</v-icon>
-        {{ item.name }}
+        <v-icon
+          :class="{ 'ma-0': displayIconsOnly, 'ma-2': !displayIconsOnly }" 
+          left>
+          {{ item.icon }}</v-icon>
+        <span v-show="!displayIconsOnly">{{ item.name }}</span>
       </v-btn>
     </v-toolbar-items>
   </v-toolbar>
@@ -52,6 +58,10 @@ export default {
         items = this.items.guests
       }
       return items
+    },
+
+    displayIconsOnly () {
+      return this.$vuetify.breakpoint.smAndDown
     }
   },
   methods: {
