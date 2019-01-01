@@ -14,13 +14,21 @@ This version of TabTracker is a little different than the one built in the tutor
 
 ## Get it up and running
 Start the node server
+
 `npm run dev`
+
 Start the front-end development server
+
 `npm run dev:client`
+
 Seed the database
+
 `npm run seed`
+
 Deploying demo web app:
+
 `npm run start`
+
 This is build the Vue application for production and re-seed the database before running the server.
 
 ## Deployment Strategy
