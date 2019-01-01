@@ -46,16 +46,10 @@ export default {
           password: this.password
         })
 
-        this.displayToast({
-          type: 'success',
-          msg: 'Login successful!'
-        })
+        this.displayToast('Login successful!', { type: 'success' })
         this.$router.push({ name: 'songs-index' })
       } catch (err) {
-        this.displayToast({
-          type: 'error',
-          msg: err.response.data.error
-        })
+        this.displayToast(err.response.data.error, { type: 'error' })
       }
     }
   }

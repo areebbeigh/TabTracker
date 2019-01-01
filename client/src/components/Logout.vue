@@ -11,9 +11,7 @@ import AuthenticationService from '@/services/AuthenticationService'
 export default {
   async mounted () {
     await AuthenticationService.logout()
-    this.displayToast({
-      msg: 'Logout successful!'
-    })
+    this.displayToast('Logout successful!')
 
     this.$router.push({ name: 'songs-index' })
   }

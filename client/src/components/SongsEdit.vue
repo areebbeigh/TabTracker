@@ -47,15 +47,9 @@ export default {
 
       try {
         await SongsService.update(song)
-        this.displayToast({
-          type: 'success',
-          msg: 'Changes successfully saved'
-        })
+        this.displayToast('Changes successfully saved', { type: 'success' })
       } catch (err) {
-        this.displayToast({
-          type: 'error',
-          msg: err.response.data.error
-        })
+        this.displayToast(err.response.data.error, { type: 'error' })
       }
 
       this.$router.push({

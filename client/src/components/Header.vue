@@ -74,6 +74,7 @@ export default {
 
   mounted () {
     this.$store.dispatch('checkAuth')
+    this.displayToast('Hi!')
   }
 }
 </script>

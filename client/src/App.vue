@@ -24,4 +24,7 @@ export default {
 </script>
 
 <style scoped>
+.toast {
+  color: red;
+}
 </style>
