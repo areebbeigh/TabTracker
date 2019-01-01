@@ -4,7 +4,7 @@ A user provided collection of song metadata, lyrics and guitar tabs. This is a p
 ![screenshot](https://github.com/areebbeigh/TabTracker/raw/master/preview.png)
 
 ## What I'm using
-TabTracker uses VueJS, Vuetify, NodeJS and Sequelize.
+TabTracker uses VueJS, Vuetify, Express and Sequelize.
 
 ## What's different
 This version of TabTracker is a little different than the one built in the tutorial.
