@@ -11,7 +11,7 @@ commit_website_files() {
   git add -f public/*
   git commit --message "[ci skip] Travis build: $TRAVIS_BUILD_NUMBER"
   git checkout deployed
-  git checkout master package.json test.txt public/*
+  git checkout master package.json test.txt public/* seeds/*
   git status
   git commit -m "[ci skip] Travis build: $TRAVIS_BUILD_NUMBER"
   git push origin deployed
