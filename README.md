@@ -9,6 +9,7 @@ TabTracker uses VueJS, Vuetify, NodeJS and Sequelize.
 ## What's different
 This version of TabTracker is a little different than the one built in the tutorial.
 - Better UI
+- Responsive! :smile:
 - Slightly different file structure
 - [Uses cookie based session management instead of JWTs](http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions/)
 
